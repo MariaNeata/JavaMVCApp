@@ -6,15 +6,15 @@ import ro.teamnet.zth.api.annotations.MyRequestMethod;
 /**
  * Created by MN on 5/6/2015.
  */
-@MyController(urlPath = "/locations")
-public class LocationController {
+@MyController(urlPath = "/jobs")
+public class JobController {
     @MyRequestMethod(urlPath = "/all")
-    public String getAllLocations() {
-        return "All Locations";
+    public String getAllJobs(){
+        return "All jobs";
     }
-
     @MyRequestMethod(urlPath = "/one")
-    public String getOneLocation() {
-        return "oneLocation";
+    public String getOneJob()
+    {
+        return "allJobs";
     }
 }
