@@ -1,3 +1,4 @@
+/*
 package ro.teamnet.zth.app;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -22,9 +23,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+*/
 /**
  * Created by MN on 5/6/2015.
- */
+ *//*
+
 public class MyDispatcherServlet extends HttpServlet {
     Map<String, MethodAttributes> allowedMethods = new HashMap<String, MethodAttributes>();
 
@@ -82,7 +85,8 @@ public class MyDispatcherServlet extends HttpServlet {
             } else return method.invoke(newControllerInstance);
         }
 
-        /*if (path.startsWith("/employees")) {
+        */
+/*if (path.startsWith("/employees")) {
             if (path.startsWith("/employees/one")) {
                 EmployeeController ec = new EmployeeController();
                 return ec.getOneEmployee();
@@ -103,10 +107,10 @@ public class MyDispatcherServlet extends HttpServlet {
             JobController dc = new JobController();
             String allJobs = dc.getAllJobs();
             return allJobs;
-        }*/
+        }*//*
+
 
         throw new DispatchException();
-
 
     }
 
@@ -120,13 +124,17 @@ public class MyDispatcherServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-          /*Delegate to someone (an application controller) */
+          */
+/*Delegate to someone (an application controller) *//*
+
         dispatchReply("GET", req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       /*Delegate to someone (an application controller) */
+       */
+/*Delegate to someone (an application controller) *//*
+
         dispatchReply("POST", req, resp);
     }
 
@@ -172,3 +180,4 @@ public class MyDispatcherServlet extends HttpServlet {
 
 
 }
+*/

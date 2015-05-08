@@ -19,4 +19,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         EmployeeDao employeeDao = new EmployeeDao();
         return employeeDao.getEmployeeById(id);
     }
+
+    public void deleteEmployee(int id) {
+        EmployeeDao employee = new EmployeeDao();
+
+        employee.deleteEmployee(employee.getEmployeeById(id));
+    }
+
+    public Employee insertEmployee(Employee employee) {
+        EmployeeDao e = new EmployeeDao();
+        return e.insertEmployee(employee);
+    }
+
+    public Employee updateEmployee(Employee employee) {
+        EmployeeDao e = new EmployeeDao();
+        return e.updateEmployee(employee);
+
+    }
 }

@@ -1,20 +1,35 @@
 package ro.teamnet.zth.app.controller;
 
-import ro.teamnet.zth.api.annotations.MyController;
-import ro.teamnet.zth.api.annotations.MyRequestMethod;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import ro.teamnet.zth.app.dao.JobDao;
+import ro.teamnet.zth.app.domain.Job;
+
+import java.util.List;
 
 /**
  * Created by MN on 5/6/2015.
  */
-@MyController(urlPath = "/jobs")
+@Controller
+@RequestMapping(value = "/jobs")
 public class JobController {
-    @MyRequestMethod(urlPath = "/all")
-    public String getAllJobs(){
-        return "All jobs";
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Job> getAllJobs() {
+        JobDao job=new JobDao();
+        return job.getAllJobs();
     }
-    @MyRequestMethod(urlPath = "/one")
-    public String getOneJob()
-    {
-        return "allJobs";
+
+    @RequestMapping(value = "/one", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Job getOneJob(@RequestParam(value = "id") String id) {
+        JobDao job=new JobDao();
+        return job.getJobById(Integer.parseInt(id));
     }
 }

@@ -1,9 +1,9 @@
 package ro.teamnet.zth.app.controller;
 
-import ro.teamnet.zth.api.annotations.MyController;
-import ro.teamnet.zth.api.annotations.MyRequestMethod;
-import ro.teamnet.zth.api.annotations.MyRequestParam;
-import ro.teamnet.zth.app.MyDispatcherServlet;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import ro.teamnet.zth.app.dao.EmployeeDao;
 import ro.teamnet.zth.app.domain.Employee;
 import ro.teamnet.zth.app.service.EmployeeServiceImpl;
@@ -13,20 +13,50 @@ import java.util.List;
 /**
  * Created by MN on 5/6/2015.
  */
-@MyController(urlPath = "/employees")
+@Controller
+@RequestMapping(value = "/employees")
 public class EmployeeController {
 
-
-    @MyRequestMethod(urlPath = "/all")
-    public List<Employee> getAllEmployees() {
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Employee> getAllEmployees() {
         EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
         return employeeService.findAllEmployees();
     }
 
-    @MyRequestMethod(urlPath = "/one")
-    public Employee getOneEmployee(@MyRequestParam(paramName="idEmployee") String idEmployee) {
+    @RequestMapping(value = "/{idEmployee}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Employee getOneEmployee(@PathVariable("idEmployee") String idEmployee) {
         EmployeeServiceImpl employee = new EmployeeServiceImpl();
         return employee.findOneEmployee(Integer.parseInt(idEmployee));
+
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteOneEmployee(@PathVariable("id") String id) {
+        EmployeeServiceImpl employee = new EmployeeServiceImpl();
+        employee.deleteEmployee(Integer.parseInt(id));
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST)
+    public
+    @ResponseBody
+    Employee addNewEmployee(@RequestBody Employee employee) {
+        EmployeeServiceImpl e = new EmployeeServiceImpl();
+        return e.insertEmployee(employee);
+
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public
+    @ResponseBody
+    Employee updateEmployee(@RequestBody Employee employee) {
+        EmployeeServiceImpl e = new EmployeeServiceImpl();
+        return e.updateEmployee(employee);
 
     }
 }
