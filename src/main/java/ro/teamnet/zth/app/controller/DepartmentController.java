@@ -1,12 +1,11 @@
 package ro.teamnet.zth.app.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import ro.teamnet.zth.app.dao.DepartmentDao;
+import org.springframework.web.bind.annotation.*;
 import ro.teamnet.zth.app.domain.Department;
+import ro.teamnet.zth.app.service.DepartmentService;
+import ro.teamnet.zth.app.service.DepartmentServiceImpl;
 
 import java.util.List;
 
@@ -16,21 +15,33 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/departments")
 public class DepartmentController {
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public
-    @ResponseBody
+    private DepartmentService department = new DepartmentServiceImpl();
+
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody
     List<Department> getAllDepartments() {
-        DepartmentDao departmentDao = new DepartmentDao();
-        return departmentDao.getAllDepartments();
+        return department.findAll();
     }
 
-    @RequestMapping(value = "/one", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    Department getOneDepartment(@RequestParam(value = "id")String id) {
-        DepartmentDao department = new DepartmentDao();
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public @ResponseBody Department getOneDepartment(@PathVariable("id") Integer idDepartment) {
+        return department.findOne(idDepartment);
+    }
 
-        return department.getDepartmentById(Integer.parseInt(id));
+    @RequestMapping(method = RequestMethod.POST)
+    public @ResponseBody Department create(@RequestBody Department d) {
+        return this.department.create(d);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public @ResponseBody Department update(@RequestBody Department d) {
+        return this.department.update(d);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void delete(@PathVariable("id") Integer idDepartment) {
+        department.delete(idDepartment);
     }
 
 }

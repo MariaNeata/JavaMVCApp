@@ -1,13 +1,12 @@
 package ro.teamnet.zth.app.controller;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ro.teamnet.zth.app.dao.JobDao;
 import ro.teamnet.zth.app.domain.Job;
+import ro.teamnet.zth.app.service.JobServiceImpl;
 
 import java.util.List;
 
@@ -17,19 +16,45 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/jobs")
 public class JobController {
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    JobServiceImpl job = new JobServiceImpl();
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public
     @ResponseBody
     List<Job> getAllJobs() {
-        JobDao job=new JobDao();
-        return job.getAllJobs();
+        return job.findAll();
+
     }
 
-    @RequestMapping(value = "/one", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
-    Job getOneJob(@RequestParam(value = "id") String id) {
-        JobDao job=new JobDao();
-        return job.getJobById(Integer.parseInt(id));
+    Job getOneJob(@PathVariable(value = "id") String id) {
+
+        return job.findOne(Integer.parseInt(id));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteOneJob(@PathVariable("id") String id) {
+        job.delete(Integer.parseInt(id));
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST)
+    public
+    @ResponseBody
+    Job addNewJob(@RequestBody Job j) {
+
+        return job.create(j);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public
+    @ResponseBody
+    Job updateJob(@RequestBody Job j) {
+
+        return job.update(j);
+
     }
 }

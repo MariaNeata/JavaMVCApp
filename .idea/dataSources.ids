@@ -22,7 +22,7 @@
       <column name="EMAIL" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
       <column name="PHONE_NUMBER" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
       <column name="HIRE_DATE" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
-      <column name="JOB_ID" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="JOB_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="SALARY" sqlType="DECIMAL" precision="8" scale="2" nullable="true" jdbcType="3"/>
       <column name="COMMISSION_PCT" sqlType="DECIMAL" precision="2" scale="2" nullable="true" jdbcType="3"/>
       <column name="MANAGER_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
@@ -34,7 +34,7 @@
       <exported-key name="employees_ibfk_3" table="employees" schema="" catalog="zth_16" columns="MANAGER_ID"/>
     </table>
     <table name="jobs" schema="" catalog="zth_16" type="TABLE">
-      <column name="JOB_ID" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="JOB_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="JOB_TITLE" sqlType="VARCHAR" precision="35" scale="0" nullable="false" jdbcType="12"/>
       <column name="MIN_SALARY" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="MAX_SALARY" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
